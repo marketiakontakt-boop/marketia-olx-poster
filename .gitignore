@@ -1,0 +1,16 @@
+venv/
+output/
+data/profiles/
+data/*.encrypted
+.env
+*.pyc
+__pycache__/
+.DS_Store
+dist/
+build/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+data/consent.json
+icon_1024.png
+AppIcon.iconset/

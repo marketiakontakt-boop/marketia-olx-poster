@@ -1,0 +1,122 @@
+{
+  "_meta": {
+    "version": "1.0",
+    "created": "2026-07-17",
+    "description": "Szablony miast dla generatora wariantów Marketia OLX Poster. Każdy wariant per miasto to inne ogłoszenie: tytuł+suffix, opis+addon, losowa dzielnica, offset ceny.",
+    "usage": "app/olx/city_variants.py wczytuje ten plik i generuje ogłoszenia per konto (accounts.cities_assigned)."
+  },
+  "cities": {
+    "Warszawa": {
+      "title_suffix": "z dostawą Warszawa i okolice",
+      "description_addon": "Wysyłka z magazynu Warszawa. Realizacja 24h dla Warszawy i okolic. Kurier InPost, DPD lub Paczkomat. Możliwość odbioru osobistego po wcześniejszej rezerwacji.",
+      "location_variants": [
+        "Warszawa, Śródmieście",
+        "Warszawa, Praga-Południe",
+        "Warszawa, Mokotów",
+        "Warszawa, Ursynów",
+        "Warszawa, Wola",
+        "Warszawa, Białołęka"
+      ],
+      "price_offset": 0,
+      "delivery_options": ["kurier", "paczkomat", "odbior_osobisty"],
+      "postal_code_prefix": "00-",
+      "notes": "Baseline dla całej Polski — cena bez offsetu."
+    },
+    "Kraków": {
+      "title_suffix": "Kraków szybka wysyłka",
+      "description_addon": "Wysyłka z magazynu Kraków. Realizacja do 48h. Kurier InPost lub DPD. Odbiór osobisty niemożliwy — tylko wysyłka kurierem.",
+      "location_variants": [
+        "Kraków, Stare Miasto",
+        "Kraków, Kazimierz",
+        "Kraków, Podgórze",
+        "Kraków, Nowa Huta",
+        "Kraków, Krowodrza"
+      ],
+      "price_offset": 5,
+      "delivery_options": ["kurier", "paczkomat"],
+      "postal_code_prefix": "30-",
+      "notes": "+5 PLN za wysyłkę spoza Mazowsza."
+    },
+    "Łódź": {
+      "title_suffix": "Łódź dostępny od ręki",
+      "description_addon": "Magazyn Łódź. Realizacja 24-48h. Kurier InPost, DPD. Możliwość odbioru osobistego (Widzew).",
+      "location_variants": [
+        "Łódź, Widzew",
+        "Łódź, Śródmieście",
+        "Łódź, Bałuty",
+        "Łódź, Górna",
+        "Łódź, Polesie"
+      ],
+      "price_offset": 0,
+      "delivery_options": ["kurier", "paczkomat", "odbior_osobisty"],
+      "postal_code_prefix": "90-",
+      "notes": "Główny hub centralnej Polski."
+    },
+    "Poznań": {
+      "title_suffix": "Poznań i Wielkopolska",
+      "description_addon": "Wysyłka z Poznania. Realizacja 24-48h. Kurier InPost, DPD, Paczkomat.",
+      "location_variants": [
+        "Poznań, Stare Miasto",
+        "Poznań, Grunwald",
+        "Poznań, Jeżyce",
+        "Poznań, Wilda",
+        "Poznań, Nowe Miasto"
+      ],
+      "price_offset": 5,
+      "delivery_options": ["kurier", "paczkomat"],
+      "postal_code_prefix": "60-",
+      "notes": "+5 PLN za wysyłkę spoza Mazowsza."
+    },
+    "Gdańsk": {
+      "title_suffix": "Gdańsk Trójmiasto",
+      "description_addon": "Magazyn Gdańsk. Wysyłka na terenie Trójmiasta oraz całej Polski. Kurier InPost, DPD, Paczkomat.",
+      "location_variants": [
+        "Gdańsk, Śródmieście",
+        "Gdańsk, Wrzeszcz",
+        "Gdańsk, Oliwa",
+        "Gdańsk, Przymorze",
+        "Gdańsk, Jasień"
+      ],
+      "price_offset": 8,
+      "delivery_options": ["kurier", "paczkomat"],
+      "postal_code_prefix": "80-",
+      "notes": "+8 PLN dla północnej Polski."
+    },
+    "Katowice": {
+      "title_suffix": "Katowice Śląsk",
+      "description_addon": "Magazyn Katowice. Realizacja 24-48h. Kurier InPost, DPD.",
+      "location_variants": [
+        "Katowice, Śródmieście",
+        "Katowice, Ligota",
+        "Katowice, Załęże",
+        "Katowice, Nikiszowiec",
+        "Katowice, Piotrowice"
+      ],
+      "price_offset": 5,
+      "delivery_options": ["kurier", "paczkomat"],
+      "postal_code_prefix": "40-",
+      "notes": "+5 PLN dla południa."
+    },
+    "Wrocław": {
+      "title_suffix": "Wrocław Dolny Śląsk",
+      "description_addon": "Magazyn Wrocław. Realizacja 24-48h. Kurier InPost, DPD, Paczkomat.",
+      "location_variants": [
+        "Wrocław, Stare Miasto",
+        "Wrocław, Krzyki",
+        "Wrocław, Śródmieście",
+        "Wrocław, Psie Pole",
+        "Wrocław, Fabryczna"
+      ],
+      "price_offset": 5,
+      "delivery_options": ["kurier", "paczkomat"],
+      "postal_code_prefix": "50-",
+      "notes": "+5 PLN dla południowego zachodu."
+    }
+  },
+  "assignments_suggestion": {
+    "_note": "Sugerowane przypisanie miast do kont (accounts.cities_assigned) — do zaakceptowania przez user-a.",
+    "marketia-glowne": ["Łódź", "Warszawa", "Kraków"],
+    "marketia-warszawa": ["Warszawa", "Poznań", "Gdańsk"],
+    "marketia-krakow": ["Kraków", "Katowice", "Wrocław"]
+  }
+}

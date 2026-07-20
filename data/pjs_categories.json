@@ -1,0 +1,57 @@
+{
+  "_meta": {
+    "version": "1.1",
+    "created": "2026-07-18",
+    "source": "pjs-researcher agent (WebFetch/WebSearch)",
+    "confidence": "medium",
+    "notes": "Skonsolidowane z pomoc.olx.pl, smartnest.pl, fashionbiznes.pl, media.olx.pl, bliskapaczka.pl. Weryfikuj manualnie kwartalnie."
+  },
+  "categories_with_pjs": [
+    {"name": "Moda", "path": "Moda", "notes": "AUTO — Przesyłka OLX przypisana; damska/męska/dziecięca odzież, obuwie, akcesoria"},
+    {"name": "Dla Dzieci", "path": "Dla Dzieci", "notes": "AUTO — zabawki, ubranka, akcesoria dziecięce"},
+    {"name": "Muzyka i Edukacja", "path": "Muzyka i Edukacja", "notes": "AUTO — instrumenty małe, książki, materiały edukacyjne"},
+    {"name": "Elektronika", "path": "Elektronika", "notes": "MANUAL — telefony, smartwatche, laptopy, komputery, RTV, konsole, akcesoria"},
+    {"name": "Dom i Ogród (mały gabaryt)", "path": "Dom i Ogród", "notes": "MANUAL — TYLKO produkty ≤30 kg / gabaryt ≤120 cm: dekoracje, drobne AGD, akcesoria kuchenne, tekstylia, ogród małe"},
+    {"name": "Sport i Hobby", "path": "Sport i Hobby", "notes": "MANUAL — planszówki, turystyka, wędkarstwo, militaria, akcesoria sportowe"},
+    {"name": "Zdrowie i Uroda", "path": "Zdrowie i Uroda (Supermarket)", "notes": "MANUAL — kosmetyki, suplementy"},
+    {"name": "Zwierzęta — akcesoria", "path": "Zwierzęta > Akcesoria i karmy", "notes": "MANUAL — TYLKO akcesoria i karmy (nie żywe zwierzęta)"},
+    {"name": "Książki i Kolekcje", "path": "Książki / Kolekcje", "notes": "MANUAL — komiksy, płyty, kolekcjonerskie"},
+    {"name": "Outlet OLX", "path": "Outlet", "notes": "Przesyłka OLX często 0 zł (Załącznik nr 10 promocyjny)"}
+  ],
+  "categories_without_pjs": [
+    {"name": "Nieruchomości", "reason": "brak fizycznego produktu wysyłkowego"},
+    {"name": "Motoryzacja (duże gabaryty)", "reason": "samochody, motocykle, przyczepy — części akcesoria mogą mieć PJS w podkategorii"},
+    {"name": "Praca", "reason": "oferty pracy — brak fizycznego produktu"},
+    {"name": "Usługi", "reason": "usługi niematerialne — brak fizycznego produktu"},
+    {"name": "Rolnictwo (duże gabaryty)", "reason": "maszyny rolnicze, zwierzęta gospodarskie"},
+    {"name": "Meble (duże gabaryty)", "reason": "kanapy, szafy, łóżka >30 kg / >120 cm — wymagany transport własny/kurier gabarytowy"},
+    {"name": "AGD duże", "reason": "lodówki, pralki, zmywarki — przekraczają limit 30 kg / gabaryt XL"},
+    {"name": "Żywe zwierzęta", "reason": "psy, koty, konie — zakazane w Paczkomatach"}
+  ],
+  "limitations": {
+    "max_weight_kg": 30,
+    "max_size_cm": "suma boków ≤120 cm (gabaryt XL)",
+    "max_value_pln": null,
+    "size_tiers": {
+      "S": "23 × 14 × 6.5 cm, do 2–5 kg",
+      "M": "35 × 26 × 19 cm, do 10 kg",
+      "L": "41 × 38 × 64 cm, do 20 kg",
+      "XL": "suma boków ≤120 cm, do 30 kg"
+    },
+    "other": [
+      "PJS dostępny TYLKO gdy w ogłoszeniu włączona Przesyłka OLX",
+      "Prowizja pobierana z ceny po sprzedaży (zależna od kategorii i ceny)",
+      "Wygaśnięcie ogłoszenia po 30 dniach bez sprzedaży = brak opłaty",
+      "PJS aktywuje się po przekroczeniu limitu darmowych ogłoszeń w kategorii",
+      "Twardy limit 30 kg / 120 cm nadpisuje whitelist — duże gabaryty wypadają fizycznie"
+    ]
+  },
+  "sources": [
+    "https://pomoc.olx.pl/hc/pl/articles/360015319020",
+    "https://smartnest.pl/w-jakich-kategoriach-dostepna-jest-przesylka-olx/",
+    "https://fashionbiznes.pl/olx-jakie-formy-przesylki-oferuje-kiedy-olx-wysylka-za-1-zl/",
+    "https://media.olx.pl/zaplac-jesli-sprzedasz-olx-wprowadza-nowy-model-platnosci",
+    "https://bliskapaczka.pl/przesylki-olx"
+  ],
+  "notes_for_dropshipping": "SAFE: Moda, Dla Dzieci, Elektronika (małe: telefony/akcesoria), Dom i Ogród (drobne ≤30 kg / ≤120 cm), Sport/Hobby, Zdrowie/Uroda, Zwierzęta (akcesoria). UNIKAJ: meble duże, AGD duże (lodówki/pralki), motoryzacja duża — PJS niedostępny. Zawsze waliduj kategorię docelową PRZED wystawieniem: jeśli produkt >30 kg lub gabaryt >120 cm, PJS zostanie odrzucony przez OLX pomimo formalnej dostępności w kategorii nadrzędnej."
+}
