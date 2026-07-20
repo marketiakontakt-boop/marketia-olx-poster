@@ -22,7 +22,7 @@ import traceback
 from datetime import datetime
 from pathlib import Path
 
-from playwright.async_api import Locator, Page
+from patchright.async_api import Locator, Page
 
 from ..config import LOGS_DIR
 

@@ -23,7 +23,7 @@ import sys
 import traceback
 from typing import Any
 
-from playwright.async_api import Page, TimeoutError as PlaywrightTimeoutError
+from patchright.async_api import Page, TimeoutError as PlaywrightTimeoutError
 
 from .browser_pool import create_browser
 from .humanizer import human_action_pause, human_type

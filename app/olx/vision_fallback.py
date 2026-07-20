@@ -24,7 +24,7 @@ from typing import TYPE_CHECKING, Any
 from ..config import LOGS_DIR
 
 if TYPE_CHECKING:  # pragma: no cover
-    from playwright.async_api import Page
+    from patchright.async_api import Page
 
 __all__ = ["vision_fallback_suggest", "VisionFailed", "is_enabled"]
 

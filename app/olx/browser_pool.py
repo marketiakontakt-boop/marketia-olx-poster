@@ -1,4 +1,4 @@
-"""Playwright browser pool z persistent context per konto.
+"""Patchright browser pool z persistent context per konto.
 
 **DECYZJA USER-A (2026-07-17):** BEZ PROXY. Kod NIE używa ``proxy=`` w launch —
 ``account_config.proxy`` pozostaje w JSON schema (SPEC sekcja 4) ale zawsze
@@ -19,29 +19,16 @@ import traceback
 from pathlib import Path
 from typing import Any
 
-from playwright.async_api import (
+from patchright.async_api import (
     BrowserContext,
     Page,
     Playwright,
     async_playwright,
 )
 
-# playwright-stealth ma 2 różne API:
-#   1.x  → ``from playwright_stealth import stealth_async``  (funkcja na page)
-#   2.x  → ``from playwright_stealth import Stealth``        (klasa, .apply_stealth_async(page))
-# Wykryj dostępny wariant przy imporcie.
-stealth_async: Any = None
-_stealth_cls: Any = None
-
-try:
-    from playwright_stealth import stealth_async as _stealth_async_1  # type: ignore
-    stealth_async = _stealth_async_1
-except ImportError:
-    try:
-        from playwright_stealth import Stealth as _Stealth  # type: ignore
-        _stealth_cls = _Stealth
-    except ImportError:  # pragma: no cover
-        pass
+# Patchright ma wbudowane anti-detect patches (runtime.enable, Console.enable,
+# iframe fingerprints, itp.) — nie łączymy go z playwright-stealth (konflikt
+# patchy per patchright docs).
 
 from ..config import PROFILES_DIR
 
@@ -230,36 +217,6 @@ _IGNORE_DEFAULT_ARGS: list[str] = [
 ]
 
 
-async def _apply_stealth(page: Page) -> None:
-    """Aplikuje stealth na pierwszej stronie (jeśli lib dostępny).
-
-    Wspiera oba API playwright-stealth (1.x funkcja + 2.x klasa).
-    """
-    try:
-        if stealth_async is not None:
-            await stealth_async(page)
-            return
-        if _stealth_cls is not None:
-            # 2.x: Stealth().apply_stealth_async(page)
-            try:
-                await _stealth_cls().apply_stealth_async(page)
-                return
-            except AttributeError:
-                # 2.x nowsze warianty: .apply(page) lub context-manager only.
-                inst = _stealth_cls()
-                if hasattr(inst, "apply"):
-                    await inst.apply(page)
-                    return
-        # Nie ma stealth — nie fatal.
-        print(
-            "[browser_pool] playwright-stealth API nierozpoznany — pomijam stealth",
-            flush=True,
-        )
-    except Exception as exc:  # pragma: no cover - stealth opcjonalny
-        print(f"[browser_pool] stealth apply failed: {exc}", flush=True)
-        traceback.print_exc(file=sys.stdout)
-
-
 def _cleanup_stale_singleton_locks(user_data_dir: Path) -> None:
     """Usuń stale Chromium Singleton locks (Cookie/Lock/Socket).
 
@@ -337,7 +294,7 @@ async def create_browser(
         - Zero ``proxy=`` param (user decyzja 2026-07-17).
         - Viewport 1440x900 (typowy MacBook Air / desktop resolution).
         - Locale pl-PL + timezone Europe/Warsaw (spójne z targetem OLX).
-        - Init script + stealth_async przed jakimkolwiek ``goto()``.
+        - Init script + patchright built-in patches przed jakimkolwiek ``goto()``.
     """
     user_data_dir = (user_data_dir or (PROFILES_DIR / account_name)).expanduser()
     user_data_dir.mkdir(parents=True, exist_ok=True)
@@ -385,8 +342,6 @@ async def create_browser(
         # Pobierz lub utwórz pierwszą stronę.
         pages = context.pages
         page = pages[0] if pages else await context.new_page()
-
-        await _apply_stealth(page)
 
         return context, page, playwright
     except Exception:

@@ -19,7 +19,7 @@ from __future__ import annotations
 import sys
 import traceback
 
-from playwright.async_api import Locator, Page
+from patchright.async_api import Locator, Page
 
 from .humanizer import human_action_pause, human_click
 from .selector_registry import SelectorMissing, resolve

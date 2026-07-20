@@ -23,7 +23,7 @@ from datetime import datetime, date
 from pathlib import Path
 from typing import Any
 
-from playwright.async_api import Page, TimeoutError as PlaywrightTimeoutError
+from patchright.async_api import Page, TimeoutError as PlaywrightTimeoutError
 
 from ..config import SCREENSHOTS_DIR
 from ..data import shared_db

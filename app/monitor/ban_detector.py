@@ -28,7 +28,7 @@ from .audit_logger import log_ban_action
 from .notification import notify
 
 if TYPE_CHECKING:  # pragma: no cover
-    from playwright.async_api import Page, Response
+    from patchright.async_api import Page, Response
 
 __all__ = [
     "BAN_ACTIONS",

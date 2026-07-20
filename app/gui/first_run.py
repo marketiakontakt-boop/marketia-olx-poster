@@ -39,8 +39,8 @@ DISCLAIMER_ITEMS: tuple[tuple[str, str], ...] = (
         "Ryzykuję permanent ban wszystkich powiązanych kont.",
     ),
     (
-        "playwright_stealth",
-        "3. playwright-stealth maskuje sygnały automatyzacji przeglądarki. "
+        "patchright_stealth",
+        "3. Patchright (patched Playwright) maskuje sygnały automatyzacji przeglądarki. "
         "W USA może być interpretowane jako CFAA violation. Konsultacja prawna zalecana.",
     ),
     (

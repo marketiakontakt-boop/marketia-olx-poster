@@ -20,7 +20,7 @@ import random
 import string
 from typing import Any
 
-from playwright.async_api import Page
+from patchright.async_api import Page
 
 from ..config import HUMAN_DELAY_MAX_S, HUMAN_DELAY_MIN_S
 
