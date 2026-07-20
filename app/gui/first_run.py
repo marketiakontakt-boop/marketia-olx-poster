@@ -12,7 +12,7 @@ from __future__ import annotations
 
 import json
 import logging
-from datetime import datetime
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import TYPE_CHECKING
 
@@ -92,7 +92,7 @@ def _save_consent() -> None:
     CONSENT_PATH.parent.mkdir(parents=True, exist_ok=True)
     payload = {
         "version": CONSENT_VERSION,
-        "accepted_at": datetime.utcnow().isoformat(),
+        "accepted_at": datetime.now(UTC).isoformat(),
         "items": {key: True for key, _ in DISCLAIMER_ITEMS},
     }
     with CONSENT_PATH.open("w", encoding="utf-8") as f:

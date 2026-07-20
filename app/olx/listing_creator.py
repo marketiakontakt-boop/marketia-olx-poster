@@ -19,7 +19,7 @@ from __future__ import annotations
 import sys
 import traceback
 from dataclasses import dataclass, field
-from datetime import datetime, date
+from datetime import UTC, datetime, date
 from pathlib import Path
 from typing import Any
 
@@ -343,7 +343,7 @@ async def _create_listing_once(page: Page, listing: ListingInput) -> ListingResu
         audit_id=audit_id,
         metadata={
             "pre_submit_screenshot": str(pre_submit_shot),
-            "completed_at": datetime.utcnow().isoformat() + "Z",
+            "completed_at": datetime.now(UTC).isoformat() + "Z",
         },
     )
 

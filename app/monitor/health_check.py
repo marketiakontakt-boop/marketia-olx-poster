@@ -15,7 +15,7 @@ import asyncio
 import logging
 import sys
 import traceback
-from datetime import datetime
+from datetime import UTC, datetime
 from typing import TYPE_CHECKING
 
 from ..data.shared_db import update_last_health_check
@@ -84,7 +84,7 @@ async def health_check_account(
             return {"account": account, "status": "ban", "reason": dom_reason}
 
         # OK
-        update_last_health_check(account, ts=datetime.utcnow())
+        update_last_health_check(account, ts=datetime.now(UTC))
         ban_behavior.record_success(account)
         _LOG.info("health_check ok: %s", account)
         return {"account": account, "status": "ok", "reason": None}

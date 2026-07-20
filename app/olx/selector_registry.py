@@ -19,7 +19,7 @@ from __future__ import annotations
 import json
 import sys
 import traceback
-from datetime import datetime
+from datetime import UTC, datetime
 from pathlib import Path
 
 from patchright.async_api import Locator, Page
@@ -178,7 +178,7 @@ async def log_selector_failure(page: Page, key: str, tried: list[str]) -> None:
             url = ""
 
         entry = {
-            "ts": datetime.utcnow().isoformat() + "Z",
+            "ts": datetime.now(UTC).isoformat() + "Z",
             "key": key,
             "tried": tried,
             "url": url,

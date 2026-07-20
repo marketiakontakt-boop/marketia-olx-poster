@@ -17,7 +17,7 @@ Playbook `BAN_ACTIONS` per reason:
 from __future__ import annotations
 
 import logging
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 from typing import TYPE_CHECKING, Any
 
 from ..data.shared_db import set_account_pause
@@ -278,7 +278,7 @@ async def trigger_ban_action(
     """
     key, action = _resolve_action(reason)
 
-    now = datetime.utcnow()
+    now = datetime.now(UTC)
     pause_hours = action.get("pause_account_hours")
     cascade_hours = int(action.get("cascade_pause_others_hours") or 0)
 

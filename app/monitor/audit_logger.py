@@ -10,7 +10,7 @@ from __future__ import annotations
 import json
 import logging
 import re
-from datetime import datetime
+from datetime import UTC, datetime
 from typing import Any
 
 from ..config import LOGS_DIR
@@ -63,7 +63,7 @@ def log_event(event_type: str, **kwargs: Any) -> None:
     _AUDIT_FILE.parent.mkdir(parents=True, exist_ok=True)
 
     payload: dict[str, Any] = {
-        "ts": datetime.utcnow().isoformat(),
+        "ts": datetime.now(UTC).isoformat(),
         "type": event_type,
     }
     for k, v in kwargs.items():

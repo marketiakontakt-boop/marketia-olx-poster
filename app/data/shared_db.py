@@ -11,7 +11,7 @@ from __future__ import annotations
 import json
 import sqlite3
 from contextlib import contextmanager
-from datetime import datetime
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, Iterator
 
@@ -202,7 +202,7 @@ def set_account_pause(
 
 def update_last_health_check(name: str, ts: datetime | None = None) -> None:
     """Aktualizuje timestamp ostatniego health check-u (idempotent)."""
-    ts = ts or datetime.utcnow()
+    ts = ts or datetime.now(UTC)
     with get_connection() as conn:
         conn.execute(
             "UPDATE olx_accounts_meta SET last_health_check = ? WHERE name = ?",
@@ -258,7 +258,7 @@ def variant_cache_save(
                 variant_json   = excluded.variant_json,
                 created_at     = excluded.created_at
             """,
-            (cache_hash, sku, city, prompt_version, payload, datetime.utcnow()),
+            (cache_hash, sku, city, prompt_version, payload, datetime.now(UTC)),
         )
 
 

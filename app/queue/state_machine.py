@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import logging
 import sqlite3
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 from enum import Enum
 from typing import Any
 
@@ -147,7 +147,7 @@ def increment_retries(job_id: int) -> None:
 
 def reschedule_job(job_id: int, delay_minutes: int) -> datetime:
     """Ustawia ``scheduled_at`` = now + delay. Zwraca nową datetime."""
-    new_dt = datetime.utcnow() + timedelta(minutes=delay_minutes)
+    new_dt = datetime.now(UTC) + timedelta(minutes=delay_minutes)
     with get_connection() as conn:
         conn.execute(
             "UPDATE olx_jobs SET scheduled_at = ? WHERE id = ?", (new_dt, job_id)
@@ -235,7 +235,7 @@ def get_jobs_by_account_and_status(
 
 def get_next_pending_job(account: str, now: datetime | None = None) -> sqlite3.Row | None:
     """Worker per-account: bierze najbliższy pending w slocie."""
-    ts = now or datetime.utcnow()
+    ts = now or datetime.now(UTC)
     with get_connection(read_only=True) as conn:
         return conn.execute(
             """

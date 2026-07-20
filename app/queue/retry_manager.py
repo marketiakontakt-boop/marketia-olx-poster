@@ -8,7 +8,7 @@ from __future__ import annotations
 import logging
 import sys
 import traceback
-from datetime import datetime
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -114,7 +114,7 @@ def record_dead_letter(job_id: int, error: str) -> None:
     payload = {
         "job_id": job_id,
         "error": error,
-        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "timestamp": datetime.now(UTC).isoformat() + "Z",
     }
     try:
         import json

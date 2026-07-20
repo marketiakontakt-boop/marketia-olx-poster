@@ -18,7 +18,7 @@ import base64
 import json
 import logging
 import os
-from datetime import datetime
+from datetime import UTC, datetime
 from typing import TYPE_CHECKING, Any
 
 from ..config import LOGS_DIR
@@ -95,7 +95,7 @@ async def vision_fallback_suggest(
         raise VisionFailed("ANTHROPIC_API_KEY not set")
 
     # 1. Screenshot (nie full_page — element powinien być w viewport).
-    timestamp = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
+    timestamp = datetime.now(UTC).strftime("%Y%m%d_%H%M%S")
     screenshot_path = LOGS_DIR / f"vision_{timestamp}.png"
     screenshot_path.parent.mkdir(parents=True, exist_ok=True)
     try:
@@ -186,7 +186,7 @@ Zwróć TYLKO JSON, bez komentarza."""
     # 5. Log do JSONL.
     _SUGGESTIONS_FILE.parent.mkdir(parents=True, exist_ok=True)
     entry = {
-        "ts": datetime.utcnow().isoformat(),
+        "ts": datetime.now(UTC).isoformat(),
         "element": element_description,
         "context": context_hint,
         "suggestions": selectors,
